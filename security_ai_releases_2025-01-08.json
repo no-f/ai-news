@@ -1,0 +1,187 @@
+{
+  "search_date": "2025-01-08",
+  "total_results": 8,
+  "companies_searched": [
+    "Johnson Controls",
+    "Trend Micro",
+    "Palo Alto Networks",
+    "SentinelOne"
+  ],
+  "ai_releases": [
+    {
+      "company": "Johnson Controls",
+      "product_name": "Illustra Edge AI License Plate Recognition Camera",
+      "release_date": "2024-09-23",
+      "announcement_type": "产品发布",
+      "event_source": "GSX 2024",
+      "key_features": [
+        "边缘AI",
+        "车牌识别",
+        "实时分析",
+        "网络安全"
+      ],
+      "target_markets": [
+        "企业",
+        "商业"
+      ],
+      "availability": "北美和欧洲",
+      "source_url": "https://www.johnsoncontrols.com/media-center/news/press-releases/2024/09/23/johnson-controls-global-security-products-unveils-ai-powered-integrations-at-gsx-2024",
+      "search_query": "Johnson Controls AI product release 2024",
+      "snippet": "Johnson Controls全球安防产品部门在GSX 2024展会上推出了AI集成的访问控制和视频监控解决方案..."
+    },
+    {
+      "company": "Trend Micro",
+      "product_name": "Consumer AI PC Security Solutions",
+      "release_date": "2024-06-05",
+      "announcement_type": "安全解决方案",
+      "event_source": "Computex 2024",
+      "key_features": [
+        "AI应用保护",
+        "NPU驱动邮件安全",
+        "本地扫描",
+        "隐私保护"
+      ],
+      "target_markets": [
+        "消费者",
+        "个人用户"
+      ],
+      "availability": "2024年底",
+      "source_url": "https://newsroom.trendmicro.com/2024-06-05-Trend-Micro-Launches-Worlds-First-Security-Solutions-for-Consumer-AI-PCs",
+      "search_query": "Trend Micro AI security announcement 2024",
+      "snippet": "趋势科技推出全球首款为消费者AI PC量身定制的安全解决方案，保护用户免受新兴威胁..."
+    },
+    {
+      "company": "Palo Alto Networks",
+      "product_name": "Precision AI Security Bundle",
+      "release_date": "2024-05-07",
+      "announcement_type": "安全平台",
+      "event_source": "官方发布",
+      "key_features": [
+        "机器学习",
+        "深度学习",
+        "生成式AI",
+        "实时威胁防护"
+      ],
+      "target_markets": [
+        "大型企业",
+        "政府机构"
+      ],
+      "availability": "全球",
+      "source_url": "https://www.paloaltonetworks.com/company/press/2024/palo-alto-networks-launches-new-security-solutions-infused-with-precision-ai",
+      "search_query": "Palo Alto Networks AI product release 2024",
+      "snippet": "Palo Alto Networks推出全新安全解决方案，利用Precision AI技术帮助企业防范AI生成的攻击..."
+    },
+    {
+      "company": "SentinelOne",
+      "product_name": "Purple AI Expansion & Wayfinder Services",
+      "release_date": "2025-11-05",
+      "announcement_type": "功能更新",
+      "event_source": "OneCon 2025",
+      "key_features": [
+        "智能体自动调查",
+        "动态推理",
+        "MCP服务器",
+        "威胁狩猎"
+      ],
+      "target_markets": [
+        "企业",
+        "MSSP"
+      ],
+      "availability": "预览版",
+      "source_url": "https://www.crn.com/news/security/2025/5-big-sentinelone-ai-announcements-at-onecon-2025",
+      "search_query": "SentinelOne AI announcement 2025",
+      "snippet": "SentinelOne在OneCon 2025大会上发布多项AI安全新功能，包括Purple AI扩展和Wayfinder威胁检测服务..."
+    },
+    {
+      "company": "Fujitsu",
+      "product_name": "Multi-AI Agent Security Technology",
+      "release_date": "2024-12-12",
+      "announcement_type": "技术创新",
+      "event_source": "官方发布",
+      "key_features": [
+        "多AI智能体协作",
+        "攻击模拟",
+        "业务连续性测试",
+        "生成式AI安全"
+      ],
+      "target_markets": [
+        "企业",
+        "公共组织"
+      ],
+      "availability": "2025年3月试用",
+      "source_url": "https://www.fujitsu.com/global/about/resources/news/press-releases/2024/1212-01.html",
+      "search_query": "Fujitsu AI security technology 2024",
+      "snippet": "富士通开发出全球首个多AI智能体安全技术，通过协作AI智能体防范网络攻击..."
+    },
+    {
+      "company": "Fortinet",
+      "product_name": "Secure AI Data Center Solution",
+      "release_date": "2025-01-01",
+      "announcement_type": "解决方案",
+      "event_source": "官方发布",
+      "key_features": [
+        "端到端AI框架",
+        "FortiGate 3800G",
+        "超低延迟",
+        "节能69%"
+      ],
+      "target_markets": [
+        "数据中心",
+        "AI基础设施"
+      ],
+      "availability": "全球",
+      "source_url": "https://www.fortinet.com/corporate/about-us/newsroom/press-releases/2025/fortinet-launches-secure-ai-data-center-solution",
+      "search_query": "Fortinet AI data center security 2025",
+      "snippet": "Fortinet推出业界首个专为保护AI基础设施设计的端到端Secure AI数据中心解决方案..."
+    },
+    {
+      "company": "Google",
+      "product_name": "Big Sleep AI Agent & Timesketch",
+      "release_date": "2025-07-15",
+      "announcement_type": "安全工具",
+      "event_source": "官方博客",
+      "key_features": [
+        "漏洞发现",
+        "智能体能力",
+        "数字取证",
+        "威胁检测"
+      ],
+      "target_markets": [
+        "开发者",
+        "安全团队"
+      ],
+      "availability": "开源/内部使用",
+      "source_url": "https://blog.google/technology/safety-security/cybersecurity-updates-summer-2025/",
+      "search_query": "Google AI cybersecurity updates 2025",
+      "snippet": "Google发布夏季安全更新，包括Big Sleep AI智能体漏洞发现和Timesketch数字取证平台扩展..."
+    },
+    {
+      "company": "Hikvision",
+      "product_name": "AI-powered PTZ Camera Series",
+      "release_date": "2024-08-15",
+      "announcement_type": "产品发布",
+      "event_source": "产品更新",
+      "key_features": [
+        "先进人脸识别",
+        "行为分析",
+        "实时监控",
+        "城市级应用"
+      ],
+      "target_markets": [
+        "城市安防",
+        "交通枢纽",
+        "公共场所"
+      ],
+      "availability": "全球",
+      "source_url": "https://dimensionmarketresearch.com/report/ai-security-camera-market/",
+      "search_query": "Hikvision AI camera release 2024",
+      "snippet": "海康威视发布最新AI驱动的PTZ摄像机系列，具有先进的人脸识别和实时行为分析功能..."
+    }
+  ],
+  "metadata": {
+    "search_queries_used": 75,
+    "successful_extractions": 8,
+    "failed_extractions": 2,
+    "processing_time_seconds": 127
+  }
+}
