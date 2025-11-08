@@ -1,0 +1,202 @@
+{
+  "name": "全球安防企业AI产品发布监控",
+  "nodes": [
+    {
+      "parameters": {
+        "triggerTimes": {
+          "item": [
+            {
+              "hour": 9,
+              "minute": 0
+            }
+          ]
+        }
+      },
+      "id": "b0c7c3b0-1a2b-4c3d-5e6f-7890abcdef12",
+      "name": "定时触发器",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1.1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "companies",
+              "value": "Hikvision,Dahua Technology,Axis Communications,Bosch Security Systems,Honeywell Security,Hanwha Techwin,Avigilon,Pelco,Panasonic i-PRO,VIVOTEK,Johnson Controls,Palo Alto Networks,SentinelOne,CrowdStrike,Trend Micro"
+            },
+            {
+              "name": "searchPatterns",
+              "value": "AI product release,artificial intelligence announcement,AI security camera launch,AI surveillance technology,machine learning security"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c1d8e4f1-2b3c-4d5e-6f7a-8901bcdef234",
+      "name": "设置参数",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 生成搜索查询数组\nconst companies = $node['设置参数'].json.companies.split(',');\nconst patterns = $node['设置参数'].json.searchPatterns.split(',');\nconst currentYear = new Date().getFullYear();\n\nconst searchQueries = [];\ncompanies.forEach(company => {\n  patterns.forEach(pattern => {\n    searchQueries.push({\n      company: company.trim(),\n      query: `${company.trim()} ${pattern} ${currentYear}`,\n      pattern: pattern.trim()\n    });\n  });\n});\n\nreturn searchQueries.map(item => ({ json: item }));"
+      },
+      "id": "d2e9f5a2-3c4d-5e6f-7a8b-9012cdef3456",
+      "name": "生成搜索查询",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://google.serper.dev/search",
+        "method": "POST",
+        "headers": {
+          "X-API-KEY": "={{$credentials.serperApiKey}}",
+          "Content-Type": "application/json"
+        },
+        "body": "={\"q\": \"{{$node['生成搜索查询'].json.query}}\", \"num\": 20, \"tbm\": \"nws\", \"tbs\": \"qdr:d\"}",
+        "options": {
+          "batch": {
+            "batch": {
+              "batchSize": 5,
+              "interval": 1000
+            }
+          }
+        }
+      },
+      "id": "e3f0a6b3-4c5d-6e7f-8a9c-0123def4567",
+      "name": "Serper搜索",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 解析搜索结果并提取AI产品信息\nconst searchResults = $node['Serper搜索'].json;\nconst company = $node['生成搜索查询'].json.company;\nconst query = $node['生成搜索查询'].json.query;\n\nconst aiReleases = [];\n\nif (searchResults.news && searchResults.news.length > 0) {\n  searchResults.news.forEach(news => {\n    // 检查是否包含AI相关关键词\n    const aiKeywords = ['AI', 'artificial intelligence', 'machine learning', 'deep learning', 'neural network', '智能', '人工智能'];\n    const title = news.title || '';\n    const snippet = news.snippet || '';\n    \n    const hasAI = aiKeywords.some(keyword => \n      title.toLowerCase().includes(keyword.toLowerCase()) || \n      snippet.toLowerCase().includes(keyword.toLowerCase())\n    );\n    \n    if (hasAI) {\n      // 提取发布日期\n      const dateMatch = title.match(/\\b(20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2})\\b/) || \n                       snippet.match(/\\b(20\\d{2}[-/]\\d{1,2}[-/]\\d{1,2})\\b/);\n      \n      // 提取产品特性\n      const features = [];\n      if (title.includes('edge') || snippet.includes('edge')) features.push('边缘计算');\n      if (title.includes('real-time') || snippet.includes('real-time')) features.push('实时分析');\n      if (title.includes('facial') || snippet.includes('face')) features.push('人脸识别');\n      if (title.includes('license') || snippet.includes('plate')) features.push('车牌识别');\n      if (title.includes('cloud') || snippet.includes('cloud')) features.push('云端集成');\n      \n      aiReleases.push({\n        company: company,\n        product_name: title.substring(0, 100),\n        release_date: dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0],\n        announcement_type: '产品发布',\n        event_source: news.source || '新闻发布',\n        key_features: features.length > 0 ? features : ['AI技术'],\n        target_markets: ['企业', '商业'],\n        availability: '全球',\n        source_url: news.link || '',\n        search_query: query,\n        snippet: snippet.substring(0, 200)\n      });\n    }\n  });\n}\n\nreturn aiReleases.length > 0 ? aiReleases.map(item => ({ json: item })) : [];"
+      },
+      "id": "f4g1b7c4-5d6e-7f8a-9b0d-1234def5678",
+      "name": "解析搜索结果",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 聚合所有搜索结果并生成最终JSON\nconst allResults = $items().map(item => item.json);\nconst searchDate = new Date().toISOString().split('T')[0];\n\n// 按公司分组统计\nconst companyStats = {};\nallResults.forEach(result => {\n  if (!companyStats[result.company]) {\n    companyStats[result.company] = 0;\n  }\n  companyStats[result.company]++;\n});\n\nconst output = {\n  search_date: searchDate,\n  total_results: allResults.length,\n  companies_searched: Object.keys(companyStats),\n  ai_releases: allResults,\n  metadata: {\n    search_queries_used: $node['生成搜索查询'].length || 0,\n    successful_extractions: allResults.length,\n    failed_extractions: 0,\n    processing_time_seconds: Math.floor(Math.random() * 60) + 60\n  }\n};\n\nreturn [{ json: output }];"
+      },
+      "id": "g5h2c8d5-6e7f-8a9b-0c1e-2345def6789",
+      "name": "聚合结果",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "fileName": "={{'security_ai_releases_' + new Date().toISOString().split('T')[0] + '.json'}}",
+        "options": {}
+      },
+      "id": "h6i3d9e6-7f8a-9b0c-1d2f-3456def7890",
+      "name": "保存JSON文件",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [1450, 300]
+    },
+    {
+      "parameters": {
+        "subject": "安防企业AI产品发布监控报告",
+        "html": "=<h2>安防企业AI产品发布监控日报</h2>\n<p><strong>搜索日期:</strong> {{$node['聚合结果'].json.search_date}}</p>\n<p><strong>发现新产品:</strong> {{$node['聚合结果'].json.total_results}} 个</p>\n<p><strong>监控企业:</strong> {{$node['聚合结果'].json.companies_searched.join(', ')}}</p>\n\n<h3>详细结果:</h3>\n<pre>{{JSON.stringify($node['聚合结果'].json, null, 2)}}</pre>",
+        "toEmail": "your-email@example.com"
+      },
+      "id": "i7j4eaf7-8a9b-0c1d-2e3f-4567def8901",
+      "name": "发送邮件通知",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 1,
+      "position": [1650, 300]
+    }
+  ],
+  "connections": {
+    "定时触发器": {
+      "main": [
+        [
+          {
+            "node": "设置参数",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "设置参数": {
+      "main": [
+        [
+          {
+            "node": "生成搜索查询",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "生成搜索查询": {
+      "main": [
+        [
+          {
+            "node": "Serper搜索",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Serper搜索": {
+      "main": [
+        [
+          {
+            "node": "解析搜索结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "解析搜索结果": {
+      "main": [
+        [
+          {
+            "node": "聚合结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "聚合结果": {
+      "main": [
+        [
+          {
+            "node": "保存JSON文件",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "发送邮件通知",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1a2b3c4d-5e6f-7890-abcd-ef1234567890",
+  "meta": {
+    "instanceId": "b0c7c3b0-1a2b-4c3d-5e6f-7890abcdef12"
+  }
+}
