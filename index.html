@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全球安防企业AI产品发布监控系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .pulse-animation { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .tech-grid { 
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">AI安防监控系统</h1>
+                        <p class="text-white/80">全球安防企业AI产品发布追踪</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right">
+                        <div class="text-sm text-white/80">最后更新</div>
+                        <div class="font-semibold" id="lastUpdate">2025-01-08 09:00</div>
+                    </div>
+                    <div class="w-3 h-3 bg-green-400 rounded-full pulse-animation"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">今日发现</p>
+                        <p class="text-3xl font-bold text-blue-600">8</p>
+                        <p class="text-gray-500 text-xs">新增AI产品</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-robot text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">监控企业</p>
+                        <p class="text-3xl font-bold text-green-600">15</p>
+                        <p class="text-gray-500 text-xs">安防公司</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-building text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">搜索查询</p>
+                        <p class="text-3xl font-bold text-purple-600">45</p>
+                        <p class="text-gray-500 text-xs">今日执行</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-search text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">成功率</p>
+                        <p class="text-3xl font-bold text-orange-600">89%</p>
+                        <p class="text-gray-500 text-xs">数据提取</p>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Recent AI Releases -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">最新AI产品发布</h2>
+                        <button class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            查看全部 <i class="fas fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4" id="releasesList">
+                        <!-- Release items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Companies Watched -->
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <h2 class="text-xl font-bold text-gray-800 mb-6">监控企业</h2>
+                <div class="space-y-3" id="companiesList">
+                    <!-- Company items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Status -->
+        <div class="mt-8 bg-white rounded-xl p-6 card-shadow">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">工作流状态</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">定时任务</h3>
+                    <p class="text-sm text-gray-600">每日09:00自动执行</p>
+                    <div class="mt-2">
+                        <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">运行正常</span>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-search text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">搜索API</h3>
+                    <p class="text-sm text-gray-600">Serper搜索集成</p>
+                    <div class="mt-2">
+                        <span class="inline-block px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">活跃</span>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-file-code text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-800">数据输出</h3>
+                    <p class="text-sm text-gray-600">JSON格式保存</p>
+                    <div class="mt-2">
+                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">最新</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuration Panel -->
+        <div class="mt-8 bg-white rounded-xl p-6 card-shadow">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">工作流配置</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-4">搜索配置</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">搜索频率</span>
+                            <span class="font-medium">每日一次</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">结果数量</span>
+                            <span class="font-medium">每查询20条</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">时间范围</span>
+                            <span class="font-medium">最近24小时</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">搜索语言</span>
+                            <span class="font-medium">多语言</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-700 mb-4">输出配置</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">文件格式</span>
+                            <span class="font-medium">JSON</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">保存路径</span>
+                            <span class="font-medium">/output/</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">文件命名</span>
+                            <span class="font-medium">日期_类型</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">备份策略</span>
+                            <span class="font-medium">30天保留</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">© 2025 AI安防监控系统. 基于n8n工作流自动化平台构建</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data - in real implementation, this would come from the n8n workflow
+        const sampleReleases = [
+            {
+                company: "Johnson Controls",
+                product: "Illustra Edge AI LPR Camera",
+                date: "2024-09-23",
+                type: "产品发布",
+                features: ["边缘AI", "车牌识别", "实时分析"],
+                source: "GSX 2024"
+            },
+            {
+                company: "Trend Micro",
+                product: "Consumer AI PC Security",
+                date: "2024-06-05",
+                type: "安全解决方案",
+                features: ["AI应用保护", "NPU驱动", "邮件安全"],
+                source: "Computex 2024"
+            },
+            {
+                company: "Palo Alto Networks",
+                product: "Precision AI Security Bundle",
+                date: "2024-05-07",
+                type: "安全平台",
+                features: ["机器学习", "深度学习", "生成式AI"],
+                source: "官方发布"
+            },
+            {
+                company: "SentinelOne",
+                product: "Purple AI Expansion",
+                date: "2025-11-05",
+                type: "功能更新",
+                features: ["智能体调查", "自动响应", "MCP服务器"],
+                source: "OneCon 2025"
+            }
+        ];
+
+        const companies = [
+            { name: "Hikvision", status: "active", lastUpdate: "2小时前" },
+            { name: "Dahua Technology", status: "active", lastUpdate: "1小时前" },
+            { name: "Axis Communications", status: "active", lastUpdate: "3小时前" },
+            { name: "Bosch Security", status: "active", lastUpdate: "30分钟前" },
+            { name: "Honeywell", status: "active", lastUpdate: "4小时前" },
+            { name: "Johnson Controls", status: "active", lastUpdate: "刚刚" },
+            { name: "Palo Alto Networks", status: "active", lastUpdate: "1小时前" },
+            { name: "SentinelOne", status: "active", lastUpdate: "刚刚" },
+            { name: "Trend Micro", status: "active", lastUpdate: "2小时前" },
+            { name: "CrowdStrike", status: "active", lastUpdate: "5小时前" }
+        ];
+
+        // Populate releases list
+        function populateReleases() {
+            const container = document.getElementById('releasesList');
+            container.innerHTML = sampleReleases.map(release => `
+                <div class="border-l-4 border-blue-500 pl-4 py-3 hover:bg-gray-50 rounded-r-lg transition-colors">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">${release.product}</h3>
+                            <p class="text-sm text-gray-600">${release.company}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="inline-block px-2 py-1 bg-${getTypeColor(release.type)}-100 text-${getTypeColor(release.type)}-800 text-xs rounded-full">
+                                ${release.type}
+                            </span>
+                            <p class="text-xs text-gray-500 mt-1">${release.date}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mb-2">
+                        ${release.features.map(feature => `
+                            <span class="inline-block px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">${feature}</span>
+                        `).join('')}
+                    </div>
+                    <p class="text-xs text-gray-500">来源: ${release.source}</p>
+                </div>
+            `).join('');
+        }
+
+        // Populate companies list
+        function populateCompanies() {
+            const container = document.getElementById('companiesList');
+            container.innerHTML = companies.map(company => `
+                <div class="flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-2 h-2 bg-${company.status === 'active' ? 'green' : 'red'}-500 rounded-full"></div>
+                        <span class="font-medium text-gray-800">${company.name}</span>
+                    </div>
+                    <span class="text-xs text-gray-500">${company.lastUpdate}</span>
+                </div>
+            `).join('');
+        }
+
+        function getTypeColor(type) {
+            const colors = {
+                '产品发布': 'blue',
+                '安全解决方案': 'green',
+                '安全平台': 'purple',
+                '功能更新': 'orange'
+            };
+            return colors[type] || 'gray';
+        }
+
+        // Update last update time
+        function updateLastUpdate() {
+            const now = new Date();
+            const timeString = now.toLocaleString('zh-CN');
+            document.getElementById('lastUpdate').textContent = timeString;
+        }
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            populateReleases();
+            populateCompanies();
+            updateLastUpdate();
+            
+            // Update every minute
+            setInterval(updateLastUpdate, 60000);
+        });
+    </script>
+</body>
+</html>
